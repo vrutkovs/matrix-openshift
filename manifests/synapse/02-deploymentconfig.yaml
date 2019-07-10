@@ -33,12 +33,39 @@ spec:
     spec:
       containers:
         - image: ''
+          args:
+          - -m
+          - synapse.app.homeserver
+          - -c
+          - /synapse/config/homeserver.yaml
+          command:
+          - python
           imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /_matrix/client/versions
+              port: 8008
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
           name: synapse
           ports:
             - containerPort: 8008
               protocol: TCP
+            - containerPort: 8448
+              protocol: TCP
           resources: {}
+          volumeMounts:
+          - mountPath: /synapse/data
+            name: volume-data
+          - mountPath: /synapse/keys
+            name: volume-keys
+            readOnly: true
+          - mountPath: /synapse/config
+            name: volume-config
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
@@ -46,6 +73,17 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
+      volumes:
+      - name: volume-data
+        emptyDir: {}
+      - name: volume-keys
+        secret:
+          defaultMode: 420
+          secretName: tls-secrets
+      - configMap:
+          defaultMode: 420
+          name: matrix-configs
+        name: volume-config
   test: false
   triggers:
     - imageChangeParams:
