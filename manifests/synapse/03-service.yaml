@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: synapse
+  name: web
+  namespace: synapse
+spec:
+  ports:
+  - port: 8008
+    protocol: TCP
+    targetPort: 8008
+  selector:
+    deploymentconfig: synapse
+  sessionAffinity: None
+  type: ClusterIP

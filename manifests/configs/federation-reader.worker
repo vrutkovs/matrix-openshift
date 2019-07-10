@@ -1,0 +1,11 @@
+worker_app: synapse.app.federation_reader
+# The replication listener on the synapse to talk to.
+worker_replication_host: matrix-synapse
+worker_replication_port: 9092
+worker_listeners:
+- type: http
+  port: 8083
+  resources:
+    - names:
+      - federation
+worker_log_config: /synapse/config/log.yaml

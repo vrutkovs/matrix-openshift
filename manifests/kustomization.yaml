@@ -3,6 +3,25 @@ resources:
   - 01-namespace.yaml
   - synapse/01-imagestream.yaml
   - synapse/02-deploymentconfig.yaml
+  - synapse/03-service.yaml
+  - synapse/04-route.yaml
   - postgres/01-imagestream.yaml
   - postgres/02-pvc.yaml
   - postgres/03-deploymentconfig.yaml
+  - postgres/04-service.yaml
+configMapGenerator:
+- name: matrix-configs
+  files:
+    - configs/federation-reader.worker
+    - configs/homeserver.yaml
+    - configs/log.config.yaml
+configurations:
+- kustomize-config.yaml
+vars:
+- name: SITE_HOSTNAME
+  objref:
+    kind: Route
+    name: synapse
+    apiVersion: route.openshift.io/v1
+  fieldref:
+    fieldpath: spec.host

@@ -36,7 +36,7 @@ spec:
           imagePullPolicy: Always
           name: synapse
           ports:
-            - containerPort: 8080
+            - containerPort: 8008
               protocol: TCP
           resources: {}
           terminationMessagePath: /dev/termination-log
