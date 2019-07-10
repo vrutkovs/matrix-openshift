@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matrix
+  annotations:
+    openshift.io/node-selector: ""
+  labels:
+    name: matrix
