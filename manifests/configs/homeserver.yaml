@@ -154,7 +154,15 @@ listeners:
 #    # Path to the database
 #    database: "/data/homeserver.db"
 
-database: {}
+database:
+  name: "psycopg2"
+  args:
+    user: synapse
+    password: synapse
+    database: synapse
+    host: postgresql
+    cp_min: 5
+    cp_max: 10
 
 # Number of events to cache in memory.
 event_cache_size: "10K"
