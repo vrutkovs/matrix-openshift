@@ -125,7 +125,7 @@ listeners:
     x_forwarded: true
 
     resources:
-      - names: [client, webclient]
+      - names: [client]
         compress: true
       - names: [federation]
         compress: false
@@ -510,9 +510,9 @@ email:
    require_transport_security: False
    notif_from: "Your Friendly %(app)s Home Server <vadim@vrutkovs.eu>"
    app_name: Matrix
-   template_dir: /config/templates
-   notif_template_html: notif_mail.html
-   notif_template_text: notif_mail.txt
+  #  template_dir: /config/templates
+  #  notif_template_html: notif_mail.html
+  #  notif_template_text: notif_mail.txt
    notif_for_new_users: True
    riot_base_url: "https://$(SITE_HOSTNAME)/"
 
