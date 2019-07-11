@@ -17,6 +17,9 @@ configMapGenerator:
     - configs/federation-reader.worker
     - configs/homeserver.yaml
     - configs/log.config.yaml
+- name: riot-configs
+  files:
+    - configs/config.json
 secretGenerator:
 - name: tls-secrets
   files:

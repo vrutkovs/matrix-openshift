@@ -1,0 +1,69 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    image.openshift.io/triggers: |
+      [
+        {"from":{"kind":"ImageStreamTag","name":"riot:stable"},"fieldPath":"spec.template.spec.containers[?(@.name==\"riot\")].image"}
+      ]
+  labels:
+    app: synapse
+    service: riot
+  name: riot
+  namespace: matrix
+spec:
+  replicas: 1
+  selector:
+    deploymentconfig: riot
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: synapse
+        service: riot
+        deploymentconfig: riot
+    spec:
+      containers:
+        - image: ''
+          imagePullPolicy: Always
+          name: riot
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+          - mountPath: /etc/riot-web
+            name: volume-config
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: matrix-configs
+        name: volume-config
+  test: false
+  triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - t
+        from:
+          kind: ImageStreamTag
+          name: 'riot:stable'
+      type: ImageChange
+    - type: ConfigChange
