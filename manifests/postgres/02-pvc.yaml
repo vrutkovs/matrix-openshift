@@ -5,6 +5,7 @@ metadata:
   namespace: synapse
   labels:
     app: synapse
+    service: postgresql
 spec:
   accessModes:
     - ReadWriteOnce

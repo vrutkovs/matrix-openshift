@@ -3,6 +3,7 @@ kind: Service
 metadata:
   labels:
     app: synapse
+    service: postgresql
   name: postgresql
   namespace: synapse
 spec:

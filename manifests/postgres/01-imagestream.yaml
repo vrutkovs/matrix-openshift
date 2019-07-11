@@ -4,7 +4,8 @@ metadata:
   name: postgresql
   namespace: synapse
   labels:
-    app: postgresql
+    app: synapse
+    service: postgresql
 spec:
   lookupPolicy:
     local: false

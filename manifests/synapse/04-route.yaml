@@ -3,6 +3,7 @@ kind: Route
 metadata:
   labels:
     app: synapse
+    service: synapse
   name: synapse
   namespace: synapse
 spec:

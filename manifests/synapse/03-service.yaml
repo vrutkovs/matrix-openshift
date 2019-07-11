@@ -3,6 +3,7 @@ kind: Service
 metadata:
   labels:
     app: synapse
+    service: synapse
   name: web
   namespace: synapse
 spec:

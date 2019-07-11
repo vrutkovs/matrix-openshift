@@ -8,6 +8,7 @@ metadata:
       ]
   labels:
     app: synapse
+    service: synapse
   name: synapse
   namespace: matrix
 spec:
@@ -29,6 +30,7 @@ spec:
       creationTimestamp: null
       labels:
         app: synapse
+        service: synapse
         deploymentconfig: synapse
     spec:
       containers:
