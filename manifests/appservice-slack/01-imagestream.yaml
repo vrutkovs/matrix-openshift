@@ -1,0 +1,19 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: appservice-slack
+  namespace: synapse
+  labels:
+    app: synapse
+    service: appservice-slack
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - name: latest
+    referencePolicy:
+      type: Local
+  - name: node
+    from:
+      kind: DockerImage
+      name: docker.io/node:10-slim

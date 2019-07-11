@@ -407,7 +407,8 @@ room_invite_state_types:
 
 
 # A list of application service config file to use
-# app_service_config_files:
+app_service_config_files:
+- "/synapse/config/slack-registration.yaml"
 #     - "/irc-config/registration_file.yaml"
 #     - "/freenode-config/registration_file.yaml"
 

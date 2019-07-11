@@ -1,0 +1,41 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: appservice-slack
+  namespace: synapse
+  labels:
+    app: synapse
+    service: appservice-slack
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'appservice-slack:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: "ImageStreamTag"
+        name: "appservice-slack:node"
+  source:
+    dockerfile: |
+      FROM node:10-slim
+      RUN apt-get update \
+        && apt-get install -y git
+      RUN git clone https://github.com/matrix-org/matrix-appservice-slack && \
+          cd matrix-appservice-slack && \
+          npm install --only=production
+      EXPOSE 3000
+      WORKDIR /matrix-appservice-slack
+      VOLUME ["/config"]
+      ENTRYPOINT ["node"]
+      CMD ["./app.js", "-c", "/config/config.yaml", "-p", "$MATRIX_PORT"]
+  triggers:
+    - type: ConfigChange
+  runPolicy: Serial
+status:
+  lastVersion: 1
