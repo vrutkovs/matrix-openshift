@@ -68,6 +68,8 @@ spec:
             readOnly: true
           - mountPath: /synapse/config
             name: volume-config
+          - mountPath: /synapse/templates
+            name: volume-templates
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
@@ -86,6 +88,10 @@ spec:
           defaultMode: 420
           name: matrix-configs
         name: volume-config
+      - configMap:
+          defaultMode: 420
+          name: notif-templates
+        name: volume-templates
   test: false
   triggers:
     - imageChangeParams:

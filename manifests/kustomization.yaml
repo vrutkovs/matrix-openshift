@@ -21,6 +21,23 @@ configMapGenerator:
     - configs/federation-reader.worker
     - configs/homeserver.yaml
     - configs/log.config.yaml
+- name: notif-templates
+  files:
+    - templates/mail.css
+    - templates/mail-expiry.css
+    - templates/mail-Vector.css
+    - templates/notice_expiry.html
+    - templates/notice_expiry.txt
+    - templates/notif.html
+    - templates/notif_mail.html
+    - templates/notif_mail.txt
+    - templates/notif.txt
+    - templates/password_reset_failure.html
+    - templates/password_reset.html
+    - templates/password_reset_success.html
+    - templates/password_reset.txt
+    - templates/room.html
+    - templates/room.txt
 - name: riot-configs
   files:
     - configs/config.json
