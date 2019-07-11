@@ -40,14 +40,13 @@ spec:
           volumeMounts:
           - mountPath: /config
             name: volume-config
-          - mountPath: /matrix-appservice-slack/slack-registration.yaml
-            subPath: slack-registration.yaml
-            name: volume-slack-reg
+          - mountPath: /db
+            name: volume-db
           env:
             - name: MATRIX_PORT
-              value: "3000"
+              value: "8090"
           ports:
-            - containerPort: 3000
+            - containerPort: 8090
               protocol: TCP
             - containerPort: 9898
               protocol: TCP
@@ -64,10 +63,8 @@ spec:
           defaultMode: 420
           name: appservice-slack-config
         name: volume-config
-      - configMap:
-          defaultMode: 420
-          name: matrix-configs
-        name: volume-slack-reg
+      - name: volume-db
+        emptyDir: {}
   test: false
   triggers:
     - imageChangeParams:

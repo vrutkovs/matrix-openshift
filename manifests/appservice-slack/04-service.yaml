@@ -9,9 +9,9 @@ metadata:
 spec:
   ports:
   - name: matrix-http
-    port: 3000
+    port: 8090
     protocol: TCP
-    targetPort: 3000
+    targetPort: 8090
   - name: slack-http
     port: 9898
     protocol: TCP

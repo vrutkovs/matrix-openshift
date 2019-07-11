@@ -26,14 +26,14 @@ spec:
       FROM node:10-slim
       RUN apt-get update \
         && apt-get install -y git
-      RUN git clone https://github.com/matrix-org/matrix-appservice-slack && \
+      RUN git clone -b develop-vrutkovs https://github.com/vrutkovs/matrix-appservice-slack && \
           cd matrix-appservice-slack && \
           npm install --only=production
       EXPOSE 3000
       WORKDIR /matrix-appservice-slack
       VOLUME ["/config"]
       ENTRYPOINT ["node"]
-      CMD ["./app.js", "-c", "/config/config.yaml", "-p", "$MATRIX_PORT"]
+      CMD ["./app.js", "-c", "/config/config.yaml", "-f", "/config/slack-registration.yaml", "-p", "$MATRIX_PORT"]
   triggers:
     - type: ConfigChange
   runPolicy: Serial

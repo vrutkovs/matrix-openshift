@@ -7,7 +7,7 @@ namespaces:
       regex: '@slack_.*'
   aliases: []
   rooms: []
-url: 'http://appservice-slack:3000'
+url: 'http://appservice-slack:8090'
 sender_localpart: slackbot
 rate_limited: true
 protocols: null
