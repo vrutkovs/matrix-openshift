@@ -9,6 +9,10 @@ resources:
   - postgres/02-pvc.yaml
   - postgres/03-deploymentconfig.yaml
   - postgres/04-service.yaml
+  - riot/01-imagestream.yaml
+  - riot/02-deploymentconfig.yaml
+  - riot/03-service.yaml
+  - riot/04-route.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:

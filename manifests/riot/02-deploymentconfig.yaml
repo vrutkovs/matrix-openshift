@@ -61,7 +61,7 @@ spec:
     - imageChangeParams:
         automatic: true
         containerNames:
-          - t
+          - riot
         from:
           kind: ImageStreamTag
           name: 'riot:stable'
