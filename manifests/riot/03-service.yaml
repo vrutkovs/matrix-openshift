@@ -8,9 +8,9 @@ metadata:
   namespace: synapse
 spec:
   ports:
-  - port: 8080
+  - port: 8081
     protocol: TCP
-    targetPort: 8080
+    targetPort: 8081
   selector:
     deploymentconfig: riot
   sessionAffinity: None

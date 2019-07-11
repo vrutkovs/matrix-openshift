@@ -9,7 +9,7 @@ metadata:
 spec:
   host: matrix-matrix.apps.vrutkovs-2.devcluster.openshift.com
   port:
-    targetPort: "8080"
+    targetPort: 8081
   tls:
     insecureEdgeTerminationPolicy: Redirect
     termination: edge
