@@ -13,6 +13,10 @@ resources:
   - riot/02-deploymentconfig.yaml
   - riot/03-service.yaml
   - riot/04-route.yaml
+  - mxisd/01-imagestream.yaml
+  - mxisd/02-deploymentconfig.yaml
+  - mxisd/03-service.yaml
+  - mxisd/04-route.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
@@ -41,6 +45,9 @@ configMapGenerator:
 - name: riot-configs
   files:
     - configs/config.json
+- name: mxisd-config
+  files:
+    - configs/mxisd.yaml
 secretGenerator:
 - name: tls-secrets
   files:

@@ -386,6 +386,7 @@ trusted_third_party_id_servers:
     - matrix.org
     - vector.im
     - riot.im
+    - $(SITE_HOSTNAME)
 
 
 ## Metrics ###
