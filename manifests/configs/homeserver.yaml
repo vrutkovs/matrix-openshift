@@ -365,7 +365,7 @@ turn_allow_guests: True
 ## Registration ##
 
 # Enable registration for new users.
-enable_registration: False
+enable_registration: true
 
 # If set, allows registration by anyone who also has the shared
 # secret, even if registration is otherwise disabled.
@@ -451,10 +451,19 @@ perspectives:
 # idp_redirect_url: Identity provider URL which will redirect
 #                   the user back to /login/saml2 with proper info.
 # See pysaml2 docs for format of config.
-#saml2_config:
-#   enabled: true
-#   config_path: "/config/sp_conf.py"
-#   idp_redirect_url: "http://redhat.com/idp"
+# saml2_config:
+#   sp_config:
+#     service:
+#       sp:
+#         allow_unsolicited: True
+#     organization:
+#       name: Red Hat
+#       display_name:
+#       - ["Example co", "en"]
+#       url: "http://example.com"
+  # enabled: true
+  # config_path: "/config/sp_conf.py"
+  # idp_redirect_url: "http://redhat.com/idp"
 
 
 
@@ -493,33 +502,33 @@ password_config:
 # If your SMTP server requires authentication, the optional smtp_user &
 # smtp_pass variables should be used
 #
-# email:
-#    enable_notifs: true
-#    smtp_host: "smtp.redhat.com"
-#    smtp_port: 587
-# #   smtp_user: "rh-matrix"
-# #   smtp_pass: "rh-matrix"
-#    require_transport_security: False
-#    notif_from: "Your Friendly %(app)s Home Server <sven@redhat.com>"
-#    app_name: Matrix
-#    template_dir: /config/templates
-#    notif_template_html: notif_mail.html
-#    notif_template_text: notif_mail.txt
-#    notif_for_new_users: True
-#    riot_base_url: "https://matrix.usersys.redhat.com/"
+email:
+   enable_notifs: true
+   smtp_host: "vrutkovs.eu"
+   smtp_port: 25
+   smtp_user: "bot"
+   smtp_pass: "iqTbNDqeuT5CvzMz"
+   require_transport_security: False
+   notif_from: "Your Friendly %(app)s Home Server <vadim@vrutkovs.eu>"
+   app_name: Matrix
+   template_dir: /config/templates
+   notif_template_html: notif_mail.html
+   notif_template_text: notif_mail.txt
+   notif_for_new_users: True
+   riot_base_url: "https://$(SITE_HOSTNAME)/"
 
 
-password_providers:
-    - module: "ldap_auth_provider.LdapAuthProvider"
-      config:
-        enabled: true
-        uri: "ldap://ldap.corp.redhat.com:389"
-        start_tls: true
-        base: "ou=users,dc=redhat,dc=com"
-        attributes:
-           uid: "uid"
-           mail: "mail"
-           name: "cn"
-        #bind_dn:
-        #bind_password:
-        #filter: "(objectClass=posixAccount)"
+# password_providers:
+#     - module: "ldap_auth_provider.LdapAuthProvider"
+#       config:
+#         enabled: true
+#         uri: "ldap://ldap.corp.redhat.com:389"
+#         start_tls: true
+#         base: "ou=users,dc=redhat,dc=com"
+#         attributes:
+#            uid: "uid"
+#            mail: "mail"
+#            name: "cn"
+#         #bind_dn:
+#         #bind_password:
+#         #filter: "(objectClass=posixAccount)"
