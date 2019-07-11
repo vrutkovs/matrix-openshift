@@ -12,7 +12,7 @@ spec:
   tags:
   - from:
       kind: DockerImage
-      name: docker.io/bubuntux/riot-web:v1.2.3
+      name: docker.io/vrutkovs/riot-nginx:v1.0.5
     name: stable
     referencePolicy:
       type: Local
