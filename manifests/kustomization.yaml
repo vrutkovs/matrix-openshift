@@ -17,60 +17,60 @@ resources:
   - mxisd/02-deploymentconfig.yaml
   - mxisd/03-service.yaml
   - mxisd/04-route.yaml
-  - appservice-slack/01-imagestream.yaml
-  - appservice-slack/02-buildconfig.yaml
-  - appservice-slack/03-deploymentconfig.yaml
-  - appservice-slack/04-service.yaml
+  # - appservice-slack/01-imagestream.yaml
+  # - appservice-slack/02-buildconfig.yaml
+  # - appservice-slack/03-deploymentconfig.yaml
+  # - appservice-slack/04-service.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
-- name: matrix-configs
-  files:
-    - configs/federation-reader.worker
-    - configs/homeserver.yaml
-    - configs/log.config.yaml
-    - configs/slack-registration.yaml
-- name: notif-templates
-  files:
-    - templates/mail.css
-    - templates/mail-expiry.css
-    - templates/mail-Vector.css
-    - templates/notice_expiry.html
-    - templates/notice_expiry.txt
-    - templates/notif.html
-    - templates/notif_mail.html
-    - templates/notif_mail.txt
-    - templates/notif.txt
-    - templates/password_reset_failure.html
-    - templates/password_reset.html
-    - templates/password_reset_success.html
-    - templates/password_reset.txt
-    - templates/room.html
-    - templates/room.txt
-- name: riot-configs
-  files:
-    - configs/config.json
-- name: mxisd-config
-  files:
-    - configs/mxisd.yaml
-- name: appservice-slack-config
-  files:
-    - config.yaml=configs/appservice-slack-config.yaml
-    - configs/slack-registration.yaml
+  - name: matrix-configs
+    files:
+      - configs/federation-reader.worker
+      - configs/homeserver.yaml
+      - configs/log.config.yaml
+      # - configs/slack-registration.yaml
+  - name: notif-templates
+    files:
+      - templates/mail.css
+      - templates/mail-expiry.css
+      - templates/mail-Vector.css
+      - templates/notice_expiry.html
+      - templates/notice_expiry.txt
+      - templates/notif.html
+      - templates/notif_mail.html
+      - templates/notif_mail.txt
+      - templates/notif.txt
+      - templates/password_reset_failure.html
+      - templates/password_reset.html
+      - templates/password_reset_success.html
+      - templates/password_reset.txt
+      - templates/room.html
+      - templates/room.txt
+  - name: riot-configs
+    files:
+      - configs/config.json
+  - name: mxisd-config
+    files:
+      - configs/mxisd.yaml
+  # - name: appservice-slack-config
+  #   files:
+  #     - config.yaml=configs/appservice-slack-config.yaml
+  #     - configs/slack-registration.yaml
 secretGenerator:
-- name: tls-secrets
-  files:
-  - secrets/signing.key
-  - secrets/tls.crt
-  - secrets/tls.dh
-  - secrets/tls.key
+  - name: tls-secrets
+    files:
+      - secrets/signing.key
+      - secrets/tls.crt
+      - secrets/tls.dh
+      - secrets/tls.key
 configurations:
-- kustomize-config.yaml
+  - kustomize-config.yaml
 vars:
-- name: SITE_HOSTNAME
-  objref:
-    kind: Route
-    name: synapse
-    apiVersion: route.openshift.io/v1
-  fieldref:
-    fieldpath: spec.host
+  - name: SITE_HOSTNAME
+    objref:
+      kind: Route
+      name: synapse
+      apiVersion: route.openshift.io/v1
+    fieldref:
+      fieldpath: spec.host
