@@ -42,7 +42,7 @@ spec:
               protocol: TCP
           resources: {}
           volumeMounts:
-            - mountPath: /config
+            - mountPath: /usr/share/nginx/html/
               name: volume-config
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
