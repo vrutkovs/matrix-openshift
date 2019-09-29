@@ -37,7 +37,6 @@ no_tls: False
 tls_fingerprints: []
 # tls_fingerprints: [{"sha256": "<base64_encoded_sha256_fingerprint>"}]
 
-
 ## Server ##
 
 # The domain name of the server, with optional explicit port.
@@ -78,14 +77,13 @@ soft_file_limit: 0
 listeners:
   # Main HTTPS listener
   # For when matrix traffic is sent directly to synapse.
-  -
-    # The port to listen for HTTPS requests on.
+  - # The port to listen for HTTPS requests on.
     port: 8448
 
     # Local addresses to listen on.
     # This will listen on all IPv4 addresses by default.
     bind_addresses:
-      - '0.0.0.0'
+      - "0.0.0.0"
       # Uncomment to listen on all IPv6 interfaces
       # N.B: On at least Linux this will also listen on all IPv4
       # addresses, so you will need to comment out the line above.
@@ -102,24 +100,23 @@ listeners:
 
     # List of HTTP resources to serve on this listener.
     resources:
-      -
-        # List of resources to host on this listener.
+      - # List of resources to host on this listener.
         names:
-          - client     # The client-server APIs, both v1 and v2
+          - client # The client-server APIs, both v1 and v2
 
         # Should synapse compress HTTP responses to clients that support it?
         # This should be disabled if running synapse behind a load balancer
         # that can do automatic compression.
         compress: true
 
-      - names: [federation]  # Federation APIs
+      - names: [federation] # Federation APIs
         compress: false
 
   # Unsecure HTTP listener,
   # For when matrix traffic passes through loadbalancer that unwraps TLS.
   - port: 8008
     tls: false
-    bind_addresses: ['0.0.0.0']
+    bind_addresses: ["0.0.0.0"]
     type: http
 
     x_forwarded: true
@@ -134,14 +131,13 @@ listeners:
   - type: metrics
     port: 9092
     bind_addresses:
-      - '0.0.0.0'
+      - "0.0.0.0"
 
   # Turn on the twisted ssh manhole service on localhost on the given
   # port.
   # - port: 9000
   #   bind_address: 127.0.0.1
   #   type: manhole
-
 
 # Database configuration
 
@@ -166,8 +162,6 @@ database:
 # Number of events to cache in memory.
 event_cache_size: "10K"
 
-
-
 # Logging verbosity level. Ignored if log_config is specified.
 verbose: 0
 
@@ -176,7 +170,6 @@ log_file: "/data/homeserver.log"
 
 # A yaml python logging config file
 log_config: "/synapse/config/log.config.yaml"
-
 
 ## Ratelimiting ##
 
@@ -205,8 +198,6 @@ federation_rc_reject_limit: 50
 # single server
 federation_rc_concurrent: 3
 
-
-
 # Directory where uploaded images and attachments are stored.
 media_store_path: "/synapse/data/media_store"
 
@@ -228,21 +219,21 @@ dynamic_thumbnails: false
 
 # List of thumbnail to precalculate when an image is uploaded.
 thumbnail_sizes:
-- width: 32
-  height: 32
-  method: crop
-- width: 96
-  height: 96
-  method: crop
-- width: 320
-  height: 240
-  method: scale
-- width: 640
-  height: 480
-  method: scale
-- width: 800
-  height: 600
-  method: scale
+  - width: 32
+    height: 32
+    method: crop
+  - width: 96
+    height: 96
+    method: crop
+  - width: 320
+    height: 240
+    method: scale
+  - width: 640
+    height: 480
+    method: scale
+  - width: 800
+    height: 600
+    method: scale
 
 # Is the preview URL API enabled?  If enabled, you *must* specify
 # an explicit url_preview_ip_range_blacklist of IPs that the spider is
@@ -311,9 +302,6 @@ url_preview_enabled: False
 # The largest allowed URL preview spidering size in bytes
 max_spider_size: "10M"
 
-
-
-
 ## Captcha ##
 # See docs/CAPTCHA_SETUP for full details of configuring this.
 
@@ -334,7 +322,6 @@ enable_registration_captcha: False
 # The API endpoint to use for verifying m.login.recaptcha responses.
 recaptcha_siteverify_api: "https://www.google.com/recaptcha/api/siteverify"
 
-
 ## Turn ##
 
 # The public URIs of the TURN server to give to clients
@@ -343,7 +330,6 @@ turn_uris: ["turn:a6n.de:3478?transport=udp", "turn:a6n.de:3478?transport=tcp"]
 # The shared secret used to compute passwords for the TURN server
 #turn_shared_secret: "o5321GEMJEKLKLT0b6w4Fb2UqEqGJWhyEMcERrlHmPhADO8eBNPM00NpXod28TWq"
 turn_shared_secret: "fDdJ8eMbkNUX7CjYjLlYoqCty8Va2sRxx9u8brxriUF0CJLCxBYh3mAB4G5n9Up9"
-
 
 # The Username and password if the TURN server needs them and
 # does not use a token
@@ -359,7 +345,6 @@ turn_user_lifetime: "1h"
 # connect to arbitrary endpoints without having first signed up for a
 # valid account (e.g. by passing a CAPTCHA).
 turn_allow_guests: True
-
 
 ## Registration ##
 
@@ -383,11 +368,10 @@ allow_guest_access: False
 # The list of identity servers trusted to verify third party
 # identifiers by this server.
 trusted_third_party_id_servers:
-    - matrix.org
-    - vector.im
-    - riot.im
-    - $(SITE_HOSTNAME)
-
+  - matrix.org
+  - vector.im
+  - riot.im
+  - $(SITE_HOSTNAME)
 
 ## Metrics ###
 
@@ -395,20 +379,18 @@ trusted_third_party_id_servers:
 enable_metrics: True
 report_stats: True
 
-
 ## API Configuration ##
 
 # A list of event types that will be included in the room_invite_state
 room_invite_state_types:
-    - "m.room.join_rules"
-    - "m.room.canonical_alias"
-    - "m.room.avatar"
-    - "m.room.name"
-
+  - "m.room.join_rules"
+  - "m.room.canonical_alias"
+  - "m.room.avatar"
+  - "m.room.name"
 
 # A list of application service config file to use
 app_service_config_files:
-- "/synapse/config/slack-registration.yaml"
+# - "/synapse/config/slack-registration.yaml"
 #     - "/irc-config/registration_file.yaml"
 #     - "/freenode-config/registration_file.yaml"
 
@@ -445,8 +427,6 @@ perspectives:
         "ed25519:auto":
           key: "Noi6WqcDj0QmPxCNQqgezwTlBKrfqehY1u2FyWP9uYw"
 
-
-
 # Enable SAML2 for registration and login. Uses pysaml2
 # config_path:      Path to the sp_conf.py configuration file
 # idp_redirect_url: Identity provider URL which will redirect
@@ -462,11 +442,9 @@ perspectives:
 #       display_name:
 #       - ["Example co", "en"]
 #       url: "http://example.com"
-  # enabled: true
-  # config_path: "/config/sp_conf.py"
-  # idp_redirect_url: "http://redhat.com/idp"
-
-
+# enabled: true
+# config_path: "/config/sp_conf.py"
+# idp_redirect_url: "http://redhat.com/idp"
 
 # Enable CAS for registration and login.
 #cas_config:
@@ -476,7 +454,6 @@ perspectives:
 #   #required_attributes:
 #   #    name: value
 
-
 # The JWT needs to contain a globally unique "sub" (subject) claim.
 #
 # jwt_config:
@@ -484,16 +461,12 @@ perspectives:
 #    secret: "a secret"
 #    algorithm: "HS256"
 
-
-
 # Enable password for login.
 password_config:
-   enabled: true
-   # Uncomment and change to a secret random string for extra security.
-   # DO NOT CHANGE THIS AFTER INITIAL SETUP!
-   #pepper: ""
-
-
+  enabled: true
+  # Uncomment and change to a secret random string for extra security.
+  # DO NOT CHANGE THIS AFTER INITIAL SETUP!
+  #pepper: ""
 
 # Enable sending emails for notification events
 # Defining a custom URL for Riot is only needed if email notifications
@@ -504,21 +477,19 @@ password_config:
 # smtp_pass variables should be used
 #
 email:
-   enable_notifs: true
-   smtp_host: "vrutkovs.eu"
-   smtp_port: 25
-   smtp_user: "bot"
-   smtp_pass: "iqTbNDqeuT5CvzMz"
-   require_transport_security: False
-   notif_from: "Your Friendly %(app)s Home Server <vadim@vrutkovs.eu>"
-   app_name: Matrix
-   template_dir: /synapse/templates
-   notif_template_html: notif_mail.html
-   notif_template_text: notif_mail.txt
-   notif_for_new_users: True
-   riot_base_url: "https://$(SITE_HOSTNAME)/"
-
-
+  enable_notifs: true
+  smtp_host: "vrutkovs.eu"
+  smtp_port: 25
+  smtp_user: "bot"
+  smtp_pass: "iqTbNDqeuT5CvzMz"
+  require_transport_security: False
+  notif_from: "Your Friendly %(app)s Home Server <vadim@vrutkovs.eu>"
+  app_name: Matrix
+  template_dir: /synapse/templates
+  notif_template_html: notif_mail.html
+  notif_template_text: notif_mail.txt
+  notif_for_new_users: True
+  riot_base_url: "https://$(SITE_HOSTNAME)/"
 # password_providers:
 #     - module: "ldap_auth_provider.LdapAuthProvider"
 #       config:
