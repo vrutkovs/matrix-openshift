@@ -1,0 +1,73 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    image.openshift.io/triggers: |
+      [
+        {"from":{"kind":"ImageStreamTag","name":"well-known-handler:30"},"fieldPath":"spec.template.spec.containers[?(@.name==\"well-known-handler\")].image"}
+      ]
+  labels:
+    app: well-known-handler
+  name: well-known-handler
+  namespace: matrix
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: well-known-handler
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      labels:
+        app: well-known-handler
+    spec:
+      containers:
+        - args:
+            - -m
+            - http.server
+          command:
+            - python3
+          image: " "
+          imagePullPolicy: IfNotPresent
+          name: well-known-handler
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /config/.well-known/matrix/
+              name: volume-config
+          workingDir: /config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: well-known-config
+          name: volume-config
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - well-known-handler
+        from:
+          kind: ImageStreamTag
+          name: well-known-handler:30
+          namespace: matrix
+      type: ImageChange
