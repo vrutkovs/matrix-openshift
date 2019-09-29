@@ -56,13 +56,6 @@ configMapGenerator:
   #   files:
   #     - config.yaml=configs/appservice-slack-config.yaml
   #     - configs/slack-registration.yaml
-secretGenerator:
-  - name: tls-secrets
-    files:
-      - secrets/signing.key
-      - secrets/tls.crt
-      - secrets/tls.dh
-      - secrets/tls.key
 configurations:
   - kustomize-config.yaml
 vars:
