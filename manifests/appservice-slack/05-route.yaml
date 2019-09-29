@@ -5,7 +5,7 @@ metadata:
     app: synapse
     service: appservice-slack
   name: slack
-  namespace: synapse
+  namespace: matrix
 spec:
   host: slack-synapse.apps.vrutkovs-2.devcluster.openshift.com
   port:

@@ -10,7 +10,7 @@ metadata:
     app: synapse
     service: postgresql
   name: postgresql
-  namespace: synapse
+  namespace: matrix
 spec:
   replicas: 1
   selector:
@@ -34,18 +34,18 @@ spec:
         deploymentconfig: postgresql
     spec:
       containers:
-        - image: ' '
+        - image: " "
           imagePullPolicy: Always
           name: postgresql
           env:
-          - name: POSTGRESQL_USER
-            value: synapse
-          - name: POSTGRESQL_PASSWORD
-            value: synapse
-          - name: POSTGRESQL_DATABASE
-            value: synapse
-          - name: POSTGRESQL_ADMIN_PASSWORD
-            value: postgres
+            - name: POSTGRESQL_USER
+              value: synapse
+            - name: POSTGRESQL_PASSWORD
+              value: synapse
+            - name: POSTGRESQL_DATABASE
+              value: synapse
+            - name: POSTGRESQL_ADMIN_PASSWORD
+              value: postgres
           ports:
             - containerPort: 5432
               protocol: TCP
@@ -65,6 +65,6 @@ spec:
           - postgresql
         from:
           kind: ImageStreamTag
-          name: 'postgresql:stable'
+          name: "postgresql:stable"
       type: ImageChange
     - type: ConfigChange

@@ -1,4 +1,4 @@
-namespace: synapse
+namespace: matrix
 resources:
   - 01-namespace.yaml
   - synapse/01-imagestream.yaml

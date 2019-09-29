@@ -5,12 +5,12 @@ metadata:
     app: synapse
     service: postgresql
   name: postgresql
-  namespace: synapse
+  namespace: matrix
 spec:
   ports:
-  - port: 5432
-    protocol: TCP
-    targetPort: 5432
+    - port: 5432
+      protocol: TCP
+      targetPort: 5432
   selector:
     deploymentconfig: postgresql
   sessionAffinity: None

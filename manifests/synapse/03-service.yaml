@@ -5,12 +5,12 @@ metadata:
     app: synapse
     service: synapse
   name: web
-  namespace: synapse
+  namespace: matrix
 spec:
   ports:
-  - port: 8008
-    protocol: TCP
-    targetPort: 8008
+    - port: 8008
+      protocol: TCP
+      targetPort: 8008
   selector:
     deploymentconfig: synapse
   sessionAffinity: None

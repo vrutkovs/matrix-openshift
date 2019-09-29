@@ -2,7 +2,7 @@ kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
   name: appservice-slack
-  namespace: synapse
+  namespace: matrix
   labels:
     app: synapse
     service: appservice-slack
@@ -11,7 +11,7 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: 'appservice-slack:latest'
+      name: "appservice-slack:latest"
   resources: {}
   successfulBuildsHistoryLimit: 5
   failedBuildsHistoryLimit: 5

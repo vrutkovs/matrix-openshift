@@ -5,7 +5,7 @@ metadata:
     app: synapse
     service: synapse
   name: synapse
-  namespace: synapse
+  namespace: matrix
 spec:
   host: matrix-matrix.apps.vrutkovs-2.devcluster.openshift.com
   path: /_matrix/

@@ -2,7 +2,7 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   name: mxisd
-  namespace: synapse
+  namespace: matrix
   labels:
     app: synapse
     service: mxisd

@@ -5,17 +5,17 @@ metadata:
     app: synapse
     service: appservice-slack
   name: appservice-slack
-  namespace: synapse
+  namespace: matrix
 spec:
   ports:
-  - name: matrix-http
-    port: 8090
-    protocol: TCP
-    targetPort: 8090
-  - name: slack-http
-    port: 9898
-    protocol: TCP
-    targetPort: 9898
+    - name: matrix-http
+      port: 8090
+      protocol: TCP
+      targetPort: 8090
+    - name: slack-http
+      port: 9898
+      protocol: TCP
+      targetPort: 9898
   selector:
     deploymentconfig: appservice-slack
   sessionAffinity: None
