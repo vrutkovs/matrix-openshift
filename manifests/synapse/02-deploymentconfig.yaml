@@ -74,6 +74,8 @@ spec:
               name: volume-config
             - mountPath: /synapse/templates
               name: volume-templates
+            - mountPath: /freenode-config
+              name: volume-freenode
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
@@ -96,6 +98,10 @@ spec:
             defaultMode: 420
             name: notif-templates
           name: volume-templates
+        - name: volume-freenode
+          secret:
+            defaultMode: 420
+            secretName: freenode-config
   test: false
   triggers:
     - imageChangeParams:

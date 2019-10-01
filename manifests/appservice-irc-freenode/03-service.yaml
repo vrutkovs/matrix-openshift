@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2018-10-21T10:34:59Z"
+  labels:
+    app: synapse
+    service: irc-bridge
+    server: freenode
+  name: freenode-bridge
+  namespace: matrix
+spec:
+  ports:
+    - name: http
+      port: 9999
+      protocol: TCP
+      targetPort: 9999
+  selector:
+    app: synapse
+    service: irc-bridge
+    server: freenode
+    deploymentconfig: appservice-irc-freenode
+  sessionAffinity: None
+  type: ClusterIP

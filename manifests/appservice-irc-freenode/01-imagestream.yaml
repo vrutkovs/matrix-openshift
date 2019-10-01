@@ -1,0 +1,19 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: appservice-irc
+  namespace: matrix
+  labels:
+    app: synapse
+    service: irc-bridge
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: latest
+      referencePolicy:
+        type: Local
+    - name: latest
+      from:
+        kind: DockerImage
+        name: docker.io/vrutkovs/matrix-appservice-irc:latest

@@ -21,6 +21,9 @@ resources:
   - oauth2-cas-proxy/03-deploymentconfig.yaml
   - oauth2-cas-proxy/04-service.yaml
   - oauth2-cas-proxy/05-route.yaml
+  - appservice-irc-freenode/01-imagestream.yaml
+  - appservice-irc-freenode/02-deploymentconfig.yaml
+  - appservice-irc-freenode/03-service.yaml
 configurations:
   - kustomize-config.yaml
 vars:
