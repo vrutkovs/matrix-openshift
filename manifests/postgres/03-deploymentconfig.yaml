@@ -49,7 +49,13 @@ spec:
           ports:
             - containerPort: 5432
               protocol: TCP
-          resources: {}
+          resources:
+            requests:
+              cpu: 1
+              memory: 500Mi
+            limits:
+              cpu: 1
+              memory: 500Mi
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst

@@ -57,7 +57,13 @@ spec:
           ports:
             - containerPort: 8008
               protocol: TCP
-          resources: {}
+          resources:
+            requests:
+              cpu: 2
+              memory: 1Gi
+            limits:
+              cpu: 2
+              memory: 1Gi
           volumeMounts:
             - mountPath: /synapse/data
               name: volume-data
