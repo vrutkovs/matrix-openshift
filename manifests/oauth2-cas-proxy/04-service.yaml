@@ -9,6 +9,6 @@ spec:
       port: 5000
       targetPort: 5000
   selector:
-    app: oauth2-cas-proxy
+    service: oauth2-cas-proxy
   type: ClusterIP
   sessionAffinity: None
