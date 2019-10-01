@@ -1,0 +1,72 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: oauth2-cas-proxy
+  namespace: matrix
+  annotations:
+    image.openshift.io/triggers: |
+      [
+        {"from":{"kind":"ImageStreamTag","name":"oauth2-cas-proxy:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"oauth2-cas-proxy\")].image"}
+      ]
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - oauth2-cas-proxy
+        from:
+          kind: ImageStreamTag
+          namespace: matrix
+          name: "oauth2-cas-proxy:latest"
+    - type: ConfigChange
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    app: oauth2-cas-proxy
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: oauth2-cas-proxy
+    spec:
+      containers:
+        - name: oauth2-cas-proxy
+          image: ""
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          env:
+            - name: BASE_URL
+              value: "https://matrix.apps.os.fedorainfracloud.org"
+            - name: OAUTH2_AUTHORIZE
+              value: "https://iddev.fedorainfracloud.org/openidc/Authorization"
+            - name: OAUTH2_TOKEN
+              value: "https://iddev.fedorainfracloud.org/openidc/Token"
+            - name: OAUTH2_USERINFO
+              value: "https://iddev.fedorainfracloud.org/openidc/UserInfo"
+            - name: OAUTH2_SCOPE
+              value: openid profile email
+          envFrom:
+            - secretRef:
+                name: openid-creds
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler

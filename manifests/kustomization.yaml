@@ -16,6 +16,11 @@ resources:
   - well-known-handler/02-deploymentconfig.yaml
   - well-known-handler/03-service.yaml
   - well-known-handler/04-route.yaml
+  - oauth2-cas-proxy/01-imagestream.yaml
+  - oauth2-cas-proxy/02-buildconfig.yaml
+  - oauth2-cas-proxy/03-deploymentconfig.yaml
+  - oauth2-cas-proxy/04-service.yaml
+  - oauth2-cas-proxy/05-route.yaml
 configurations:
   - kustomize-config.yaml
 vars:

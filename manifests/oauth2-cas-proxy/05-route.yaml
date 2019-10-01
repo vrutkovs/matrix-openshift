@@ -1,0 +1,19 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: oauth2-cas-proxy
+  namespace: matrix
+spec:
+  host: matrix-matrix.apps.vrutkovs-2.devcluster.openshift.com
+  subdomain: ""
+  path: /_cas
+  to:
+    kind: Service
+    name: oauth-cas-proxy
+    weight: 100
+  port:
+    targetPort: 5000
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None

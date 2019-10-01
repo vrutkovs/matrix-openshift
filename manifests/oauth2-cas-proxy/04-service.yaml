@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: oauth-cas-proxy
+  namespace: matrix
+spec:
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  selector:
+    app: oauth2-cas-proxy
+  type: ClusterIP
+  sessionAffinity: None
