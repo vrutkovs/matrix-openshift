@@ -8,6 +8,9 @@ metadata:
       [
         {"from":{"kind":"ImageStreamTag","name":"oauth2-cas-proxy:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"oauth2-cas-proxy\")].image"}
       ]
+  labels:
+    app: synapse
+    service: oauth2-cas-proxy
 spec:
   strategy:
     type: Rolling
@@ -34,12 +37,14 @@ spec:
   revisionHistoryLimit: 10
   test: false
   selector:
-    app: oauth2-cas-proxy
+    app: synapse
+    service: oauth2-cas-proxy
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: oauth2-cas-proxy
+        app: synapse
+        service: oauth2-cas-proxy
     spec:
       containers:
         - name: oauth2-cas-proxy
