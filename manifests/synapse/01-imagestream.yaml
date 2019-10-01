@@ -10,9 +10,9 @@ spec:
   lookupPolicy:
     local: false
   tags:
-  - from:
-      kind: DockerImage
-      name: docker.io/matrixdotorg/synapse:v1.1.0-py3
-    name: stable
-    referencePolicy:
-      type: Local
+    - from:
+        kind: DockerImage
+        name: docker.io/matrixdotorg/synapse:v1.3.1-py3
+      name: stable
+      referencePolicy:
+        type: Local
