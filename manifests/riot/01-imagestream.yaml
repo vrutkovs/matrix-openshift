@@ -12,7 +12,7 @@ spec:
   tags:
     - from:
         kind: DockerImage
-        name: docker.io/vrutkovs/riot-nginx:v1.3.0
+        name: docker.io/vrutkovs/riot-nginx:v1.4.0
       name: stable
       referencePolicy:
         type: Local
