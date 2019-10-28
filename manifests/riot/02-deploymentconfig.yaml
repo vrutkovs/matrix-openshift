@@ -44,9 +44,6 @@ spec:
             requests:
               cpu: 100m
               memory: 5Mi
-            limits:
-              cpu: 200m
-              memory: 20Mi
           volumeMounts:
             - mountPath: /config
               name: volume-config
