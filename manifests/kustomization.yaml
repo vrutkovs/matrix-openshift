@@ -33,7 +33,7 @@ vars:
   - name: SITE_HOSTNAME
     objref:
       kind: Route
-      name: synapse
+      name: well-known-handler
       apiVersion: route.openshift.io/v1
     fieldref:
       fieldpath: spec.host
